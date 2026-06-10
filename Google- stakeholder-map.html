@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Google stakeholder map — Fospha partnerships</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f8f7;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border-hover: rgba(0,0,0,0.22);
+    --text-primary: #111110;
+    --text-secondary: #6b6b68;
+    --text-tertiary: #a8a8a4;
+    --purple-fill: #EEEDFE;
+    --purple-border: #AFA9EC;
+    --purple-text: #3C3489;
+    --purple-sub: #534AB7;
+    --teal-fill: #E1F5EE;
+    --teal-border: #5DCAA5;
+    --teal-text: #085041;
+    --teal-sub: #0F6E56;
+    --amber-fill: #FAEEDA;
+    --amber-border: #EF9F27;
+    --amber-text: #412402;
+    --amber-sub: #854F0B;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .page { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .page-header { margin-bottom: 2rem; }
+  .page-title { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .page-sub { font-size: 13px; color: var(--text-secondary); }
+
+  .toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .url-input {
+    flex: 1; min-width: 220px;
+    height: 36px; padding: 0 12px;
+    font-size: 13px; font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .url-input:focus { border-color: var(--border-hover); }
+
+  button {
+    height: 36px; padding: 0 14px;
+    font-size: 13px; font-family: inherit; font-weight: 500;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: background .12s, border-color .12s;
+    white-space: nowrap;
+  }
+  button:hover { background: var(--bg); border-color: var(--border-hover); }
+  button.btn-primary { background: var(--text-primary); color: var(--surface); border-color: transparent; }
+  button.btn-primary:hover { opacity: .85; background: var(--text-primary); }
+
+  .controls { display: flex; align-items: center; gap: 16px; margin-bottom: 1.75rem; flex-wrap: wrap; }
+  .control-group { display: flex; align-items: center; gap: 6px; }
+  .control-label { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
+
+  .pill-group { display: flex; gap: 4px; }
+  .pill {
+    height: 30px; padding: 0 14px;
+    font-size: 12px; font-weight: 500; font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all .12s;
+  }
+  .pill:hover { color: var(--text-primary); border-color: var(--border-hover); background: var(--surface); }
+  .pill.active { background: var(--text-primary); color: var(--surface); border-color: transparent; }
+  .pill.active-purple { background: var(--purple-fill); color: var(--purple-text); border-color: var(--purple-border); }
+  .pill.active-teal { background: var(--teal-fill); color: var(--teal-text); border-color: var(--teal-border); }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 2rem; }
+  .leg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); }
+  .leg-dot { width: 10px; height: 10px; border-radius: 3px; border: 1px solid; flex-shrink: 0; }
+
+  .seg-block { margin-bottom: 3rem; }
+  .seg-header {
+    display: flex; align-items: center; gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.75rem;
+  }
+  .seg-name { font-size: 15px; font-weight: 600; }
+  .seg-badge {
+    font-size: 11px; font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .seg-badge.purple { background: var(--purple-fill); color: var(--purple-text); border-color: var(--purple-border); }
+  .seg-badge.teal { background: var(--teal-fill); color: var(--teal-text); border-color: var(--teal-border); }
+
+  .accounts-row { display: flex; flex-wrap: wrap; gap: 2.5rem; align-items: flex-start; }
+
+  .acct-block { display: flex; flex-direction: column; align-items: center; }
+  .acct-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .tree { display: flex; flex-direction: column; align-items: center; }
+  .tree-level { display: flex; gap: 12px; justify-content: center; }
+  .v-line { width: 1px; height: 22px; background: var(--border-hover); }
+  .h-connector { display: flex; justify-content: center; width: 100%; }
+  .h-line { height: 1px; background: var(--border-hover); }
+
+  .node {
+    width: 164px;
+    padding: 10px 13px 10px 22px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    transition: border-color .12s, box-shadow .12s;
+  }
+  .node:hover { border-color: var(--border-hover); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .node.purple { background: var(--purple-fill); border-color: var(--purple-border); }
+  .node.teal { background: var(--teal-fill); border-color: var(--teal-border); }
+  .node.amber { background: var(--amber-fill); border-color: var(--amber-border); }
+
+  .node-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; line-height: 1.3; }
+  .node.purple .node-name { color: var(--purple-text); }
+  .node.teal .node-name { color: var(--teal-text); }
+  .node.amber .node-name { color: var(--amber-text); }
+  .node:not(.purple):not(.teal):not(.amber) .node-name { color: var(--text-primary); }
+
+  .node-title { font-size: 11px; line-height: 1.35; margin-bottom: 2px; }
+  .node.purple .node-title { color: var(--purple-sub); }
+  .node.teal .node-title { color: var(--teal-sub); }
+  .node.amber .node-title { color: var(--amber-sub); }
+  .node:not(.purple):not(.teal):not(.amber) .node-title { color: var(--text-secondary); }
+
+  .node-client { font-size: 10px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .node-tag {
+    display: inline-block; margin-top: 5px;
+    font-size: 10px; font-weight: 500;
+    background: rgba(0,0,0,.05);
+    color: var(--text-secondary);
+    border-radius: 4px;
+    padding: 1px 7px;
+  }
+
+  .rag { position: absolute; top: 50%; left: 10px; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; }
+  .rag-g { background: #22c55e; }
+  .rag-a { background: #f59e0b; }
+  .rag-r { background: #ef4444; }
+
+  .edit-hint {
+    position: absolute; top: 8px; right: 8px;
+    font-size: 12px; color: var(--text-tertiary);
+    opacity: 0; transition: opacity .12s;
+  }
+  .node:hover .edit-hint { opacity: 1; }
+
+  .spec-divider { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .spec-label { font-size: 11px; font-weight: 600; color: var(--text-tertiary); letter-spacing: .05em; text-transform: uppercase; margin-bottom: 12px; }
+  .spec-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+
+  .spec-card {
+    width: 180px; padding: 12px 13px 12px 22px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer; position: relative;
+    transition: border-color .12s;
+    display: flex; flex-direction: column; justify-content: flex-start;
+  }
+  .spec-card:hover { border-color: var(--border-hover); }
+
+  .empty { font-size: 13px; color: var(--text-tertiary); padding: .5rem 0; }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.3);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+  }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    width: 100%; max-width: 340px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.12);
+  }
+  .modal-title { font-size: 15px; font-weight: 600; margin-bottom: 1.25rem; }
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 5px; letter-spacing: .03em; text-transform: uppercase; }
+  .field input, .field select {
+    width: 100%; height: 36px; padding: 0 10px;
+    font-size: 13px; font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color .12s;
+  }
+  .field input:focus, .field select:focus { border-color: var(--border-hover); }
+  .modal-actions { display: flex; gap: 8px; margin-top: 1.25rem; }
+  .modal-actions .save { flex: 1; }
+  .modal-actions .del { color: #dc2626; border-color: #fecaca; }
+  .modal-actions .del:hover { background: #fef2f2; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    background: var(--text-primary); color: var(--surface);
+    font-size: 13px; font-weight: 500;
+    padding: 10px 20px; border-radius: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s;
+    z-index: 2000;
+  }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 600px) {
+    .accounts-row { gap: 2rem; }
+    .node { width: 148px; }
+    .spec-card { width: 160px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-title">Google stakeholder map</div>
+    <div class="page-sub">Fospha partnerships — NA &amp; EMEA</div>
+  </div>
+
+  <div class="toolbar">
+    <input class="url-input" id="sh-url"
+      value="https://docs.google.com/spreadsheets/d/1rwGs-L9EF-qymhCA7U9VZBVozzuO6-g2Kj10IfepXwE/edit"
+      placeholder="Google Sheets URL…"/>
+    <button onclick="doRefetch()"><i class="ti ti-refresh"></i> Fetch latest</button>
+    <button class="btn-primary" onclick="openAdd()"><i class="ti ti-plus"></i> Add person</button>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <span class="control-label">Region</span>
+      <div class="pill-group">
+        <button class="pill active" id="r-na" onclick="setRegion('NA',this)">North America</button>
+        <button class="pill" id="r-emea" onclick="setRegion('EMEA',this)">EMEA</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Segment</span>
+      <div class="pill-group">
+        <button class="pill active" id="s-all" onclick="setSeg('all')">All</button>
+        <button class="pill" id="s-gcs" onclick="setSeg('GCS')">GCS</button>
+        <button class="pill" id="s-lcs" onclick="setSeg('LCS')">LCS</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--purple-fill);border-color:var(--purple-border)"></div>GCS sales</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--teal-fill);border-color:var(--teal-border)"></div>LCS sales</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--amber-fill);border-color:var(--amber-border)"></div>Measurement / GTM</div>
+    <div class="leg"><div class="leg-dot" style="background:#fff;border-color:rgba(0,0,0,.15)"></div>Unassigned</div>
+    <div class="leg"><div class="rag rag-g" style="position:static;width:8px;height:8px"></div>Active</div>
+    <div class="leg"><div class="rag rag-a" style="position:static;width:8px;height:8px"></div>Warm</div>
+    <div class="leg"><div class="rag rag-r" style="position:static;width:8px;height:8px"></div>Cold</div>
+  </div>
+
+  <div id="chart"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div id="modal-area"></div>
+
+<script>
+let region = 'NA', seg = 'all', editId = null;
+const ROLE_ORDER = ['hoc','ae','am','as','other'];
+
+function classRole(t) {
+  if (!t) return 'other';
+  const s = t.toLowerCase();
+  if (s.includes('head of')) return 'hoc';
+  if (s.includes('senior account executive') || s.includes('account executive')) return 'ae';
+  if (s.includes('account manager') || s.includes('senior account manager')) return 'am';
+  if (s.includes('account strategist') || s.includes('account stategist')) return 'as';
+  return 'other';
+}
+function isSpec(t) {
+  if (!t) return false;
+  const s = t.toLowerCase();
+  return s.includes('lead') || s.includes('product') || s.includes('gtm') ||
+         s.includes('strategy') || s.includes('measurement') || s.includes('analytical');
+}
+function ragClass(r) {
+  if (!r || r.includes('🟢')) return 'rag-g';
+  if (r.includes('🟡')) return 'rag-a';
+  return 'rag-r';
+}
+function inits(n) {
+  if (!n) return '?';
+  const p = n.trim().split(' ');
+  return (p[0][0] + (p[1] ? p[1][0] : '')).toUpperCase();
+}
+function nodeColor(p) {
+  if (isSpec(p.title)) return 'amber';
+  if (p.market === 'LCS') return 'teal';
+  return 'purple';
+}
+
+let people = [
+  {id:1,region:'NA',market:'GCS',name:'Grant Hailer',title:'Head of Commerce',email:'ghailer@google.com',client:'RMS Beauty',rag:'🟢'},
+  {id:2,region:'NA',market:'GCS',name:'Devon Daniusis',title:'Account Executive',email:'ddaniusis@google.com',client:'RMS Beauty',rag:'🟢'},
+  {id:3,region:'NA',market:'GCS',name:'Daniela Shea',title:'Account Strategist',email:'danielcshea@google.com',client:'RMS Beauty',rag:'🟢'},
+  {id:4,region:'NA',market:'GCS',name:'Preston Cotnoir',title:'Regional Product Lead, Advanced Measurement',email:'pcotnoir@google.com',client:'RMS Beauty',rag:'🟢'},
+  {id:5,region:'NA',market:'GCS',name:'John Brightman',title:'GTM Product Strategy',email:'',client:'RMS Beauty',rag:'🟢'},
+  {id:6,region:'NA',market:'GCS',name:'Spela Jesihar',title:'Account Executive',email:'sjesihar@google.com',client:'Golfballs',rag:'🟢'},
+  {id:7,region:'NA',market:'GCS',name:'Caroline Baird',title:'Account Manager',email:'cjbaird@google.com',client:'Golfballs',rag:'🟢'},
+  {id:8,region:'NA',market:'GCS',name:'Keri Taylor',title:'Account Executive',email:'kerivw@google.com',client:'Callaway Golf',rag:'🟢'},
+  {id:9,region:'NA',market:'GCS',name:'Stephanie Wilson',title:'Account Strategist',email:'smwilson@google.com',client:'Callaway Golf',rag:'🟢'},
+  {id:10,region:'NA',market:'GCS',name:'Sukhmani Kaur',title:'Account Manager',email:'ksukhmani@google.com',client:'MagBak',rag:'🟢'},
+  {id:11,region:'NA',market:'GCS',name:'Teresa Chen',title:'Google Measurement Lead',email:'tchn@google.com',client:'MagBak',rag:'🟢'},
+  {id:12,region:'NA',market:'LCS',name:'Chris Hubbard',title:'Senior Account Executive',email:'chrishubbard@google.com',client:'CarParts',rag:'🟢'},
+  {id:13,region:'NA',market:'LCS',name:'Nicholas Flage',title:'Analytical Lead',email:'nfleagle@google.com',client:'CarParts',rag:'🟢'},
+  {id:14,region:'EMEA',market:'GCS',name:'David Lewis',title:'Account Strategist',email:'dilewis@google.com',client:'Cocopup',rag:'🟢'},
+  {id:15,region:'EMEA',market:'GCS',name:'Anurag Sharma',title:'Senior Market Lead',email:'anuragsharmajk@google.com',client:'With Nothing Underneath',rag:'🟢'},
+  {id:16,region:'EMEA',market:'GCS',name:'Seun Ogunkunle',title:'Senior Account Manager',email:'oluwaseun@google.com',client:'With Nothing Underneath',rag:'🟢'},
+];
+
+function makeNode(p) {
+  const c = nodeColor(p);
+  const cl = (p.client && p.client !== '-') ? p.client : '';
+  return `<div class="node ${c}" onclick="openEdit(${p.id})">
+    <div class="rag ${ragClass(p.rag)}"></div>
+    <div class="edit-hint"><i class="ti ti-pencil"></i></div>
+    <div class="node-name">${p.name || '—'}</div>
+    <div class="node-title">${p.title || '—'}</div>
+    ${cl ? `<div class="node-client">${cl}</div>` : ''}
+  </div>`;
+}
+
+function makeSpec(p) {
+  const brand = (p.client && p.client !== '-') ? p.client : '';
+  return `<div class="spec-card" style="background:var(--amber-fill);border-color:var(--amber-border)" onclick="openEdit(${p.id})">
+    <div class="rag ${ragClass(p.rag)}"></div>
+    <div class="edit-hint"><i class="ti ti-pencil"></i></div>
+    <div class="node-name" style="color:var(--amber-text);font-size:13px;font-weight:600;margin-bottom:3px;line-height:1.3">${p.name || '—'}</div>
+    <div class="node-title" style="color:var(--amber-sub);font-size:11px;line-height:1.35">${p.title || '—'}</div>
+    ${brand ? `<span class="node-tag" style="margin-top:6px">${brand}</span>` : ''}
+  </div>`;
+}
+
+function buildTree(pod) {
+  const sorted = [...pod].sort((a, b) =>
+    ROLE_ORDER.indexOf(classRole(a.title)) - ROLE_ORDER.indexOf(classRole(b.title))
+  );
+  const hocs = sorted.filter(p => classRole(p.title) === 'hoc');
+  const aes  = sorted.filter(p => classRole(p.title) === 'ae');
+  const rest = sorted.filter(p => !['hoc','ae'].includes(classRole(p.title)));
+
+  let rows = [];
+  if (hocs.length) rows.push(hocs);
+  if (aes.length)  rows.push(aes);
+  if (rest.length) rows.push(rest);
+  if (!rows.length) return '';
+
+  let html = '<div class="tree">';
+  rows.forEach((row, ri) => {
+    if (ri > 0) {
+      // vertical line then horizontal spread
+      html += '<div class="v-line"></div>';
+      if (row.length > 1) {
+        const w = (row.length - 1) * 176;
+        html += `<div class="h-connector"><div class="h-line" style="width:${w}px"></div></div>`;
+      }
+      // vertical stubs down to each node
+      html += `<div class="tree-level">`;
+      row.forEach((p, i) => {
+        html += '<div style="display:flex;flex-direction:column;align-items:center;">';
+        if (row.length > 1) html += '<div class="v-line"></div>';
+        html += makeNode(p);
+        html += '</div>';
+      });
+      html += '</div>';
+    } else {
+      html += `<div class="tree-level">${row.map(makeNode).join('')}</div>`;
+    }
+  });
+  html += '</div>';
+  return html;
+}
+
+function render() {
+  const el = document.getElementById('chart');
+  const base = people.filter(p => p.region === region);
+  const segs = seg === 'all' ? ['GCS','LCS'] : [seg];
+  const active = segs.filter(s => base.some(p => p.market === s));
+
+  if (!active.length) {
+    el.innerHTML = '<div class="empty">No people in this region yet.</div>';
+    return;
+  }
+
+  let html = '';
+  for (const s of active) {
+    const sp = base.filter(p => p.market === s);
+    const sales = sp.filter(p => !isSpec(p.title));
+    const specs = sp.filter(p => isSpec(p.title));
+    const accounts = [...new Set(sales.map(p => p.client).filter(c => c && c !== '-'))];
+    const unassigned = sales.filter(p => !p.client || p.client === '-');
+    const isLCS = s === 'LCS';
+
+    html += `<div class="seg-block">
+      <div class="seg-header">
+        <span class="seg-name">${s}</span>
+        <span class="seg-badge ${isLCS ? 'teal' : 'purple'}">${isLCS ? 'Large Customer Sales' : 'Google Customer Solutions'}</span>
+      </div>`;
+
+    if (!accounts.length && !unassigned.length && !specs.length) {
+      html += '<div class="empty">No people mapped yet.</div>';
+    }
+
+    if (accounts.length) {
+      html += '<div class="accounts-row">';
+      for (const acc of accounts) {
+        const pod = sales.filter(p => p.client === acc);
+        html += `<div class="acct-block">
+          <div class="acct-label">${acc}</div>
+          ${buildTree(pod)}
+        </div>`;
+      }
+      html += '</div>';
+    }
+
+    if (unassigned.length) {
+      html += `<div style="margin-top:1.5rem">
+        <div class="acct-label">Unassigned</div>
+        <div class="accounts-row">${unassigned.map(p =>
+          `<div class="acct-block">${makeNode(p)}</div>`
+        ).join('')}</div>
+      </div>`;
+    }
+
+    if (specs.length) {
+      html += `<div class="spec-divider">
+        <div class="spec-label">Measurement &amp; GTM — advisory, not in sales line</div>
+        <div class="spec-row">${specs.map(makeSpec).join('')}</div>
+      </div>`;
+    }
+
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function setRegion(r, btn) {
+  region = r;
+  document.querySelectorAll('[id^="r-"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function setSeg(s) {
+  seg = s;
+  ['all','gcs','lcs'].forEach(k => {
+    const b = document.getElementById('s-' + k);
+    b.className = 'pill';
+  });
+  if (s === 'all') document.getElementById('s-all').classList.add('active');
+  if (s === 'GCS') document.getElementById('s-gcs').classList.add('active-purple');
+  if (s === 'LCS') document.getElementById('s-lcs').classList.add('active-teal');
+  render();
+}
+
+function openEdit(id) {
+  editId = id;
+  const p = people.find(x => x.id === id);
+  if (p) showModal(p, false);
+}
+function openAdd() {
+  editId = null;
+  showModal({ region, market: seg === 'LCS' ? 'LCS' : 'GCS', name:'', title:'', email:'', client:'', rag:'🟢' }, true);
+}
+
+function showModal(p, isNew) {
+  document.getElementById('modal-area').innerHTML = `
+  <div class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-title">${isNew ? 'Add person' : 'Edit person'}</div>
+      <div class="field"><label>Full name</label><input id="m-name" value="${p.name || ''}"/></div>
+      <div class="field"><label>Title</label><input id="m-title" value="${p.title || ''}"/></div>
+      <div class="field"><label>Email</label><input id="m-email" value="${p.email || ''}"/></div>
+      <div class="field"><label>Segment</label>
+        <select id="m-market">
+          <option value="GCS" ${p.market === 'GCS' ? 'selected' : ''}>GCS — Google Customer Solutions</option>
+          <option value="LCS" ${p.market === 'LCS' ? 'selected' : ''}>LCS — Large Customer Sales</option>
+        </select>
+      </div>
+      <div class="field"><label>Client / brand</label>
+        <input id="m-client" value="${p.client && p.client !== '-' ? p.client : ''}" placeholder="Leave blank if no specific account"/>
+      </div>
+      <div class="field"><label>Relationship</label>
+        <select id="m-rag">
+          <option value="🟢" ${!p.rag || p.rag === '🟢' ? 'selected' : ''}>Active</option>
+          <option value="🟡" ${p.rag === '🟡' ? 'selected' : ''}>Warm</option>
+          <option value="🔴" ${p.rag === '🔴' ? 'selected' : ''}>Cold / inactive</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary save" onclick="saveModal(${isNew})">Save</button>
+        ${!isNew ? `<button class="del" onclick="delPerson(${p.id})"><i class="ti ti-trash"></i></button>` : ''}
+        <button onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function saveModal(isNew) {
+  const v = {
+    name:   document.getElementById('m-name').value.trim(),
+    title:  document.getElementById('m-title').value.trim(),
+    email:  document.getElementById('m-email').value.trim(),
+    market: document.getElementById('m-market').value,
+    client: document.getElementById('m-client').value.trim() || '-',
+    rag:    document.getElementById('m-rag').value,
+  };
+  if (isNew) {
+    const id = Math.max(0, ...people.map(p => p.id)) + 1;
+    people.push({ ...v, region, id });
+  } else {
+    const i = people.findIndex(x => x.id === editId);
+    if (i > -1) people[i] = { ...people[i], ...v };
+  }
+  closeModal();
+  render();
+  showToast(isNew ? 'Person added' : 'Changes saved');
+}
+
+function delPerson(id) {
+  people = people.filter(p => p.id !== id);
+  closeModal();
+  render();
+  showToast('Person removed');
+}
+
+function closeModal(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('modal-area').innerHTML = '';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function doRefetch() {
+  showToast('Paste this URL into Claude to re-fetch your sheet data');
+}
+
+render();
+</script>
+</body>
+</html>
